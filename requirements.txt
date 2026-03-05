@@ -1,5 +1,6 @@
-pandas
-numpy
-scikit-learn
-ipywidgets
-ipython
+fastapi
+uvicorn
+wikipedia
+pyjokes
+pywhatkit
+wordhoard
