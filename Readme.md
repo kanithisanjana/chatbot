@@ -1,84 +1,122 @@
-## CHATBOT - VOICE ASSISTANT
-This project demonstrates how speech recognition and text-to-speech technologies can be used to build a simple voice-controlled personal assistant in Python. It is suitable for beginners and academic mini-projects.
-# 🎙️ SANJU – Python Voice Assistant
+# 🎙️ SANJU – Voice Assistant
 
-SANJU is a Python-based voice assistant that listens to user voice commands and performs various tasks such as playing music, providing time and date information, answering questions, defining words, telling jokes, and opening applications.
+A simple **Python Voice Assistant** built using **FastAPI (Backend)** and **Streamlit (Frontend)**.
 
----
-
-## 🚀 Features
-
-- Voice input using microphone
-- Text-to-speech responses
-- Play songs on YouTube
-- Responds to greetings
-- Provides current time, date, and day
-- Fetches information from Wikipedia
-- Dictionary word meanings
-- Tells jokes
-- Opens Chrome and Visual Studio Code
-- Exit using voice command
+It supports:
+- 🎤 Voice Commands
+- ⌨️ Text Commands
+- 🕒 Time & Date
+- 📖 Wikipedia Search
+- 📚 Word Definitions
+- 😂 Random Jokes
+- ▶️ Play Songs on YouTube
 
 ---
 
-## 🛠️ Technologies Used
+# 🏗️ Project Structure
 
-- Python 3
-- speech_recognition
+```
+sanju-voice-assistant
+│
+├── backend
+│   ├── main.py
+│   └── requirements.txt
+│
+├── frontend
+│   ├── app.py
+│   └── requirements.txt
+│
+└── README.md
+```
+
+---
+
+# 🚀 Installation
+
+## 1. Clone Repository
+
+```
+git clone https://github.com/yourusername/sanju-voice-assistant.git
+cd sanju-voice-assistant
+```
+
+---
+
+# 🔧 Backend Setup
+
+```
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+Backend will run at:
+
+```
+http://localhost:8000
+```
+
+---
+
+# 💻 Frontend Setup
+
+Open another terminal:
+
+```
+cd frontend
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+Frontend will run at:
+
+```
+http://localhost:8501
+```
+
+---
+
+# 🎯 Example Commands
+
+| Command | Result |
+|-------|-------|
+| hello | Greeting |
+| time | Current Time |
+| date | Today's Date |
+| day | Current Day |
+| who is Elon Musk | Wikipedia Info |
+| define computer | Dictionary Meaning |
+| joke | Random Joke |
+| play shape of you | Plays song on YouTube |
+
+---
+
+# 🧠 Technologies Used
+
+- Python
+- FastAPI
+- Streamlit
+- SpeechRecognition
 - pyttsx3
+- Wikipedia
 - pywhatkit
-- wikipedia
 - pyjokes
 - wordhoard
-- os, sys
 
 ---
 
-## 📦 Installation
+# ⚠️ Important
 
-Install the required libraries:
+Make sure the **backend is running before starting frontend**.
 
-```bash
-pip install speechrecognition pyttsx3 pywhatkit wikipedia pyjokes wordhoard pyaudio
-```
+Also allow **microphone access** for voice commands.
 
-## ▶️ How to Run
+---
 
-1. Clone the repository:
+# 👩‍💻 Author
 
-```bash
-git clone https://github.com/your-username/sanju-voice-assistant.git
-```
+**Sanjana Kanithi**
 
-2. Navigate to the project directory:
+---
 
-   ```bash
-   cd sanju-voice-assistant
-   ```
-
-3. Run the program:
-   ```bash
-   python sanju.py
-   ```
-
-4. Stop the program:
-   ```bash
-   Ctrl + C
-   ```
-
-## 🗣️ Sample Voice Commands
-
-1. Play Believer
-2. What is the time now
-3. What is today’s date
-4. Who is APJ Abdul Kalam
-5. Define machine learning
-6. Tell me a joke
-7. Open VS Code
-8. Exit
-
-👩‍💻 Author
-
-Kanithi Sanjana
-
-⭐ If you like this project, consider giving it a star!
+⭐ If you like this project, consider giving it a **star on GitHub**!
