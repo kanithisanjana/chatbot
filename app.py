@@ -1,57 +1,53 @@
-import streamlit as st
-import speech_recognition as sr
-import requests
-import pyttsx3
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
-# Initialize speaker
-engine = pyttsx3.init()
-engine.setProperty("rate", 170)
+from chatbot import generate_response
+from database import create_table
+from database import save_chat
+from database import get_all_chats
 
-def speak(text):
-    engine.say(text)
-    engine.runAndWait()
+app = FastAPI(title="AI Chatbot API")
 
-st.set_page_config(page_title="SANJU Voice Assistant")
-st.title("🎙️ SANJU – Voice Assistant")
+create_table()
 
-recognizer = sr.Recognizer()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-# 🎤 VOICE INPUT
-if st.button("🎤 Speak"):
-    with sr.Microphone() as source:
-        st.info("Listening...")
-        recognizer.adjust_for_ambient_noise(source)
-        audio = recognizer.listen(source)
+class UserMessage(BaseModel):
+    message: str
 
-    try:
-        command = recognizer.recognize_google(audio)
-        st.success(f"You said: {command}")
 
-        res = requests.post(
-            "http://localhost:8000/command",
-            params={"command": command}
-        )
+@app.get("/")
+def home():
+    return {"message": "Chatbot API Running"}
 
-        reply = res.json()["response"]
-        st.write("🤖 SANJU:", reply)
-        speak(reply)
 
-    except sr.UnknownValueError:
-        st.error("Sorry, I could not understand.")
-        speak("Sorry, I could not understand.")
+@app.post("/chat")
+def chat(data: UserMessage):
 
-    except sr.RequestError:
-        st.error("Network error.")
-        speak("Network error")
+    user_msg = data.message
 
-# ⌨️ OPTIONAL TEXT INPUT
-command_text = st.text_input("Or type a command")
+    bot_reply = generate_response(user_msg)
 
-if st.button("Send Text"):
-    res = requests.post(
-        "http://localhost:8000/command",
-        params={"command": command_text}
-    )
-    reply = res.json()["response"]
-    st.write("🤖 SANJU:", reply)
-    speak(reply)
+    save_chat(user_msg, bot_reply)
+
+    return {
+        "user_message": user_msg,
+        "bot_response": bot_reply
+    }
+
+
+@app.get("/history")
+def history():
+
+    chats = get_all_chats()
+
+    return {
+        "chat_history": chats
+    }
