@@ -1,35 +1,36 @@
 # 🤖 Intelligent AI Assistant
 
-An AI-powered conversational assistant built using **Python, FastAPI, Transformers, NLTK, SQLite, HTML, CSS, and JavaScript**. The application leverages Natural Language Processing (NLP) and Transformer-based language models to generate intelligent responses, maintain conversation history, and provide a seamless chat experience through a web interface.
+An AI-powered conversational assistant built using **Python, FastAPI, Transformers, NLTK, SQLite, HTML, CSS, and JavaScript**. The assistant combines a Knowledge Base, Wikipedia-based information retrieval, and Transformer-based Natural Language Processing (NLP) to provide accurate and intelligent responses to user queries.
 
 ---
 
-# 📌 Overview
+# 📌 Project Overview
 
-The Intelligent AI Assistant is designed to interact with users in natural language, understand queries, and generate meaningful responses using advanced NLP techniques.
+The Intelligent AI Assistant is designed to simulate human-like conversations while maintaining factual accuracy through a hybrid architecture.
 
-The project demonstrates:
+Unlike traditional chatbots that rely solely on AI-generated responses, this project uses:
 
-* Natural Language Processing (NLP)
-* Transformer-based AI models
-* REST API development using FastAPI
-* Database integration using SQLite
-* Frontend-Backend communication
-* Conversational AI applications
+- Knowledge Base Retrieval
+- Wikipedia Information Retrieval
+- Transformer-based Response Generation
+- Chat History Logging
+
+This hybrid approach improves answer quality, reduces hallucinations, and provides more reliable responses.
 
 ---
 
 # 🚀 Features
 
-* 💬 Real-time AI conversations
-* 🧠 Transformer-based response generation
-* 📚 Natural Language Processing (NLP)
-* ⚡ FastAPI REST API
-* 🗄️ SQLite chat history storage
-* 🎨 Interactive web interface
-* 🔄 Dynamic frontend-backend communication
-* 📜 Conversation logging
-* 🌐 Scalable architecture
+- 💬 Real-time conversational AI
+- 📚 Knowledge Base for predefined accurate responses
+- 🌐 Wikipedia-powered information retrieval
+- 🧠 Transformer-based NLP response generation
+- ⚡ FastAPI REST API backend
+- 🗄️ SQLite database integration
+- 📜 Chat history storage and retrieval
+- 🎨 Interactive and responsive web interface
+- 🔄 Dynamic frontend-backend communication
+- 🔍 Intelligent query routing
 
 ---
 
@@ -37,32 +38,34 @@ The project demonstrates:
 
 ## Backend
 
-* Python
-* FastAPI
-* Transformers (Hugging Face)
-* NLTK
-* SQLite
+- Python
+- FastAPI
+- Transformers (Hugging Face)
+- NLTK
+- Wikipedia API
+- SQLite
 
 ## Frontend
 
-* HTML5
-* CSS3
-* JavaScript
+- HTML5
+- CSS3
+- JavaScript
 
 ## Database
 
-* SQLite
+- SQLite
 
 ---
 
 # 📂 Project Structure
 
-```text id="s2v32i"
+```text
 AI_CHATBOT_PROJECT/
 │
 ├── backend/
 │   ├── app.py
 │   ├── chatbot.py
+│   ├── knowledge_base.py
 │   ├── database.py
 │   ├── chatbot.db
 │   └── requirements.txt
@@ -77,66 +80,105 @@ AI_CHATBOT_PROJECT/
 
 ---
 
-# ⚙️ Installation
+# 🏗️ System Architecture
 
-## Clone Repository
-
-```bash id="qj6nly"
-git clone https://github.com/yourusername/intelligent-ai-assistant.git
-cd intelligent-ai-assistant
-```
-
-## Install Dependencies
-
-```bash id="73obgo"
-pip install -r requirements.txt
-```
-
-Or
-
-```bash id="l31x5k"
-py -m pip install fastapi uvicorn transformers torch nltk python-multipart
+```text
+User Query
+    ↓
+Knowledge Base Search
+    ↓
+Answer Found?
+ ├─ Yes → Return Accurate Answer
+ │
+ └─ No
+      ↓
+Wikipedia Information Retrieval
+      ↓
+Information Found?
+ ├─ Yes → Return Retrieved Information
+ │
+ └─ No
+      ↓
+Transformer Model (FLAN-T5)
+      ↓
+Generate Intelligent Response
+      ↓
+Store Chat History
+      ↓
+Return Response
 ```
 
 ---
 
-# ▶️ Running the Application
+# ⚙️ Installation
+
+## Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/intelligent-ai-assistant.git
+
+cd intelligent-ai-assistant
+```
+
+---
+
+## Install Required Packages
+
+```bash
+pip install -r requirements.txt
+```
+
+or
+
+```bash
+py -m pip install fastapi uvicorn transformers torch nltk wikipedia python-multipart
+```
+
+---
+
+# ▶️ Running the Backend
 
 Navigate to backend directory:
 
-```bash id="swmxyt"
+```bash
 cd backend
 ```
 
 Start FastAPI server:
 
-```bash id="iwxjlwm"
+```bash
 py -m uvicorn app:app --reload
 ```
 
 Server URL:
 
-```text id="nzh87g"
+```text
 http://127.0.0.1:8000
 ```
 
 API Documentation:
 
-```text id="uq5ycn"
+```text
 http://127.0.0.1:8000/docs
 ```
 
 ---
 
-# 🌐 Frontend
+# 🌐 Running the Frontend
 
 Open:
 
-```text id="x5zt9c"
+```text
 frontend/index.html
 ```
 
-or use VS Code Live Server.
+or
+
+Use VS Code Live Server:
+
+```text
+Right Click → Open with Live Server
+```
 
 ---
 
@@ -144,15 +186,17 @@ or use VS Code Live Server.
 
 ## Home Endpoint
 
-```http id="gq8pqk"
+### Request
+
+```http
 GET /
 ```
 
-Response:
+### Response
 
-```json id="lyp3zq"
+```json
 {
-  "message": "AI Assistant Running"
+    "message": "AI Assistant Running"
 }
 ```
 
@@ -160,36 +204,42 @@ Response:
 
 ## Chat Endpoint
 
-```http id="7r4ml8"
+### Request
+
+```http
 POST /chat
 ```
 
-Request:
+### Request Body
 
-```json id="i13vk9"
+```json
 {
-  "message": "What is Artificial Intelligence?"
+    "message": "What is Artificial Intelligence?"
 }
 ```
 
-Response:
+### Response
 
-```json id="d5vv7k"
+```json
 {
-  "user_message": "What is Artificial Intelligence?",
-  "bot_response": "Artificial Intelligence is a field of computer science focused on creating systems capable of performing tasks that typically require human intelligence."
+    "user_message": "What is Artificial Intelligence?",
+    "bot_response": "Artificial Intelligence is a branch of computer science focused on creating intelligent systems capable of performing tasks that normally require human intelligence."
 }
 ```
 
 ---
 
-## Chat History
+## Chat History Endpoint
 
-```http id="c0h8zz"
+### Request
+
+```http
 GET /history
 ```
 
-Returns all previous conversations stored in SQLite.
+### Response
+
+Returns all previous chat conversations stored in SQLite.
 
 ---
 
@@ -197,78 +247,86 @@ Returns all previous conversations stored in SQLite.
 
 ## chat_logs
 
-| Field        | Type     |
-| ------------ | -------- |
-| id           | INTEGER  |
-| user_message | TEXT     |
-| bot_response | TEXT     |
-| timestamp    | DATETIME |
+| Field | Type |
+|---------|---------|
+| id | INTEGER |
+| user_message | TEXT |
+| bot_response | TEXT |
+| timestamp | DATETIME |
 
 ---
 
-# 🔍 System Workflow
+# 🔍 NLP Workflow
 
-```text id="7z6r9q"
+```text
 User Input
      ↓
-Frontend Interface
+Text Preprocessing
      ↓
-FastAPI Backend
+Knowledge Base Lookup
      ↓
-NLP Processing
+Wikipedia Retrieval
      ↓
-Transformer Model
+Transformer-Based NLP
      ↓
-AI Response Generation
+Response Generation
      ↓
-Store Conversation in SQLite
+Database Logging
      ↓
-Return Response to User
+Return Response
 ```
 
 ---
 
 # 🎯 Applications
 
-* AI Assistants
-* Virtual Assistants
-* Educational Chatbots
-* Information Retrieval Systems
-* NLP Learning Projects
-* Conversational AI Research
-* Intelligent Help Desk Systems
+- Intelligent Virtual Assistants
+- Educational AI Assistants
+- Question Answering Systems
+- Knowledge Retrieval Systems
+- Conversational AI Applications
+- NLP Learning Projects
+- Information Assistance Tools
+- AI Research Demonstrations
 
 ---
 
 # 📸 Screenshots
 
-Add screenshots of:
+## Chat Interface
 
-* Home Page
-* Chat Interface
-* API Documentation
-* Chat History
+Add your chatbot screenshots here:
 
-Example:
-
-```text id="g4hpt5"
+```text
 screenshots/chat-interface.png
+```
+
+## API Documentation
+
+```text
+screenshots/api-docs.png
+```
+
+## Chat History
+
+```text
+screenshots/chat-history.png
 ```
 
 ---
 
 # 📈 Future Enhancements
 
-* Voice Interaction
-* Speech-to-Text Integration
-* Text-to-Speech Responses
-* Multi-language Support
-* User Authentication
-* Personalized Conversations
-* Sentiment Analysis
-* Knowledge Base Integration
-* OpenAI/Gemini API Support
-* AI Agent Capabilities
+- 🎙️ Voice Input Support
+- 🔊 Text-to-Speech Responses
+- 🌍 Multi-language Support
+- 🔐 User Authentication
+- 😊 Sentiment Analysis
+- 📄 Chat Export to PDF
+- 🌙 Dark Mode
+- 🧠 Context-Aware Conversations
+- 🔎 Real-Time Web Search Integration
+- 🤖 AI Agent Functionality
 
 ---
 
@@ -276,14 +334,26 @@ screenshots/chat-interface.png
 
 This project demonstrates practical implementation of:
 
-* Natural Language Processing (NLP)
-* Conversational AI
-* FastAPI Development
-* REST APIs
-* Database Management
-* Frontend-Backend Integration
-* Transformer Models
-* AI Application Development
+- Natural Language Processing (NLP)
+- Conversational AI
+- Transformer Models
+- FastAPI Development
+- REST API Design
+- Database Management using SQLite
+- Information Retrieval Systems
+- Frontend-Backend Integration
+- Hybrid AI Architectures
+- Intelligent Response Generation
+
+---
+
+# 🌟 Key Highlights
+
+- Hybrid Knowledge Base + Wikipedia + AI Architecture
+- Reduced Hallucination Compared to Traditional Chatbots
+- Faster Responses for Frequently Asked Questions
+- Improved Accuracy Through Information Retrieval
+- Scalable and Modular Design
 
 ---
 
@@ -291,7 +361,7 @@ This project demonstrates practical implementation of:
 
 **Sanjana K**
 
-B.Tech Student | AI & Machine Learning Enthusiast
+B.Tech Student | Artificial Intelligence & Machine Learning Enthusiast
 
 GitHub: https://github.com/yourusername
 
@@ -299,4 +369,13 @@ LinkedIn: https://linkedin.com/in/yourprofile
 
 ---
 
-# ⭐ If you found this project useful, consider giving it a star on GitHub!
+# 📄 License
+
+This project is developed for educational and learning purposes.
+
+---
+
+# ⭐ Support
+
+If you found this project useful, please consider giving it a star ⭐ on GitHub.
+Your support helps improve and maintain the project.
