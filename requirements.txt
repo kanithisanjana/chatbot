@@ -3,4 +3,5 @@ uvicorn
 transformers
 torch
 nltk
+wikipedia
 python-multipart
