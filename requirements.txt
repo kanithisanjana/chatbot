@@ -1,6 +1,0 @@
-fastapi
-uvicorn
-wikipedia
-pyjokes
-pywhatkit
-wordhoard
